@@ -12,7 +12,7 @@ NTP_SERVER: str = "us.pool.ntp.org"
 
 def nth_weekday(nth_year: int, nth_month: int, target_wday: int, n: int) -> int:
     # target_wday: Monday=0 … Sunday=6
-    first_day_wday = time.mktime((nth_year, nth_month, 1, 0, 0, 0, 0, 0)) // 86400 % 7
+    first_day_wday = time.localtime(time.mktime((nth_year, nth_month, 1, 0, 0, 0, 0, 0)))[6]
     # days to the first occurrence of target_wday
     delta = (target_wday - first_day_wday) % 7
     day = 1 + delta + (n - 1) * 7
