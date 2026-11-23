@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="MicroPythonTools">
+    <option name="activeWebReplPresetId" value="6b5e9ad8-abb4-41c1-b03e-6b83418228fe" />
     <option name="areStubsEnabled" value="false" />
-    <option name="lastShownVersion" value="2026.1.1" />
     <option name="pluginEnabled" value="true" />
     <option name="portName" value="/dev/ttyACM0" />
+    <option name="webReplPresets">
+      <map>
+        <entry key="6b5e9ad8-abb4-41c1-b03e-6b83418228fe" value="{&quot;id&quot;:&quot;6b5e9ad8-abb4-41c1-b03e-6b83418228fe&quot;,&quot;name&quot;:&quot;Default&quot;}" />
+      </map>
+    </option>
+    <option name="webReplPresetsMigrated" value="true" />
   </component>
 </project>

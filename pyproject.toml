@@ -9,4 +9,8 @@ dependencies = []
 [dependency-groups]
 dev = [
     "micropython-esp32-stubs>=1.26.0.post1",
+    "pytest>=9.2.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

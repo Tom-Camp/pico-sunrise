@@ -18,9 +18,9 @@ Install [Micropython](https://micropython.org/download/RPI_PICO2_W/) on the _Pic
 then upload the files to the board. The easiest way to do this is to use 
 [Thonny](https://thonny.org).
 
-`lib/time_sync.py` updates the Pico's clock to UTC, and contains a functions to calculate 
-Daylight Savings and Eastern timezone. Adjust the _STD_OFFSET_ and _DST_OFFSET_ to your timezone.
-The `eastern_to_utc` function will calculate using the offsets.
+`lib/time_sync.py` updates the Pico's clock to UTC. `lib/alarm.py` contains functions to calculate
+Daylight Savings, Eastern timezone, and the next alarm. Adjust the _STD_OFFSET_ and _DST_OFFSET_ to
+your timezone. The `utc_to_eastern` function will calculate using the offsets.
 
 Connect GPIO 18 on the Pico to the data pin on the FeatherWing.
 
