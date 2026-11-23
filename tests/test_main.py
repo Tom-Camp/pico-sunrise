@@ -54,3 +54,17 @@ def test_unexpected_error_resets_and_recovers():
     board = Board(NIGHT, days=5, sync_error_at=25).run()
     board.assert_alarms_on_time()
     assert board.resets == 1
+
+
+@pytest.mark.parametrize(
+    "hours",
+    [2 / 3600, 1, 9, 9.8],
+    ids=["startup delay", "first sleep", "second sleep", "sunrise"],
+)
+def test_interrupt_stops_the_program_with_lights_off(hours):
+    board = Board(NIGHT, days=2, interrupt_at=hours)
+    with pytest.raises(KeyboardInterrupt):
+        board.run()
+    assert board.hours() == pytest.approx(hours, abs=1 / 3600)
+    assert not board._lit
+    assert board.resets == 0

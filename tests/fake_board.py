@@ -43,9 +43,11 @@ class Board:
     wifi_outages, ntp_outages: (from, to) hours after power-on
     drift_ppm: how fast (positive) or slow (negative) the board's clock and sleeps run
     sync_error_at: hours after power-on when one NTP sync raises a non-OSError
+    interrupt_at: hours after power-on when Ctrl-C (Thonny's Stop button) is pressed once
     """
 
-    def __init__(self, start, days=1, wifi_outages=(), ntp_outages=(), drift_ppm=0, sync_error_at=None):
+    def __init__(self, start, days=1, wifi_outages=(), ntp_outages=(), drift_ppm=0, sync_error_at=None,
+                 interrupt_at=None):
         self.start = eastern(start).timestamp()
         self.end = self.start + days * 86400
         self.now = self.start
@@ -53,6 +55,7 @@ class Board:
         self.ntp_outages = ntp_outages
         self.rate = 1 + drift_ppm / 1e6
         self.sync_error_at = sync_error_at
+        self.interrupt_at = interrupt_at
         self.sunrises = []
         self.negative_sleeps = []
         self.resets = 0
@@ -86,7 +89,12 @@ class Board:
         if seconds < 0:
             self.negative_sleeps.append(seconds)
             return
-        self.now += seconds / self.rate
+        wake = self.now + seconds / self.rate
+        if self.interrupt_at is not None and self.hours(wake) >= self.interrupt_at:
+            self.now = max(self.now, self.start + self.interrupt_at * 3600)
+            self.interrupt_at = None
+            raise KeyboardInterrupt
+        self.now = wake
         if self.now > self.end:
             raise SimulationOver
 

@@ -1,6 +1,11 @@
+import time
+
+# Leave time to press Stop in Thonny before anything else runs
+print("Starting in 5 seconds, press Stop/Ctrl-C to cancel...")
+time.sleep(5)
+
 import machine
 import neopixel
-import time
 
 from lib.alarm import next_alarm
 from lib.sunrise import Sunrise
@@ -23,7 +28,9 @@ while True:
         time.sleep(next_alarm(time.time()))
         sunrise.sunrise()
     except KeyboardInterrupt:
+        # Re-raise to drop to the REPL; otherwise the loop would just continue
         sunrise.stop()
+        raise
     except Exception as e:
         print("Error:", repr(e))
         sunrise.stop()
