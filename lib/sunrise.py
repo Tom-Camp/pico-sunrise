@@ -17,7 +17,6 @@ class Sunrise:
         """
         Start the sun to risin'
         """
-        self.pixels.brightness = BRIGHTNESS
         light_order = [
             11, 20, 12, 19, 2, 5, 26, 29, 3, 4, 10, 13, 18, 21, 27, 28,
             1, 6, 9, 14, 17, 22, 25, 30, 0, 7, 8, 15, 16, 23, 24, 31,

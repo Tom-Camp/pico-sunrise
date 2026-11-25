@@ -1,9 +1,5 @@
 import time
 
-# Leave time to press Stop in Thonny before anything else runs
-print("Starting in 5 seconds, press Stop/Ctrl-C to cancel...")
-time.sleep(5)
-
 import machine
 import neopixel
 

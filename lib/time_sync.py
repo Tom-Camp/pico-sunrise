@@ -9,11 +9,12 @@ wifi = WiFiManager(ssid=secrets.SSID, password=secrets.PASSWORD)
 
 
 def sync_and_set_rtc() -> bool:
-    """Connect to WiFi and set the RTC to UTC. Return True on success."""
+    """Connect to Wi-Fi and set the RTC to UTC. Return True on success."""
     try:
         # Always reconnect; the link may have dropped since the last sync
         if not wifi.connect(timeout=10):
             return False
+        ntptime.host = NTP_SERVER
         ntptime.settime()
         return True
     except OSError as e:
